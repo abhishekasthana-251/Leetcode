@@ -4,12 +4,6 @@ public:
         sort(nums.begin(),nums.end());
         int n=nums.size();
         int a=n/2;
-        if(nums[0]==nums[a]){
-            return nums[a];
-        } 
-        else if(nums[n-1]==nums[a]){
-            return nums[a];
-        }
-        return -1;
+        return nums[a];
     }
 };
