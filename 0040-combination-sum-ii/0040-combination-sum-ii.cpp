@@ -1,22 +1,19 @@
 class Solution {
 public:
-void find(int ind ,vector<int>&arr,int target ,vector<int> &current,vector<vector<int>>& ans ,int n,int sum){
-    if(sum==target){
+void find(int ind ,vector<int>&arr,int target ,vector<int> &current,vector<vector<int>>& ans ,int n){
+    if(target==0){
         ans.push_back(current);
         return;
     }
-    if(sum>target)return ;
-    if(ind==n)return;
-    //pick
-    current.push_back(arr[ind]);
-    sum+=arr[ind];
-    find(ind+1, arr,target,current,ans ,n,sum);
-    current.pop_back();
-    sum-=arr[ind];
 
-    while(ind+1 <arr.size() && arr[ind]==arr[ind+1]) ind++;
-
-    find(ind+1,arr,target,current ,ans ,n, sum);
+    for(int i=ind; i< n;i++){
+        if(i>ind && arr[i]==arr[i-1])continue;
+        if(arr[i]>target)break;
+        current.push_back(arr[i]);
+        find(i+1,arr,target-arr[i],current,ans,n);
+        current.pop_back();
+    }
+    
 }
 
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
@@ -24,7 +21,7 @@ void find(int ind ,vector<int>&arr,int target ,vector<int> &current,vector<vecto
         vector<int>current;
         sort(candidates.begin(),candidates.end());
         int n= candidates.size();
-        find(0,candidates,target,current,ans,n,0);
+        find(0,candidates,target,current,ans,n);
         return ans;
         
     }
