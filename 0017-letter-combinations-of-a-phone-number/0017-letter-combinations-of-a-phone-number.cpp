@@ -6,7 +6,7 @@ private:
             ans.push_back(output);
             return ;
         }
-        int number =digit[index]-'0';
+        int number =digit[index]-'0';//convert current digits into integer
         string value =mapping[number];
 
         for(int i=0;i<value.length();i++){
