@@ -1,6 +1,13 @@
 class Solution {
 public:
     int n,m;
+//{1, 0} → move down (row +1, same column)
+
+// {-1, 0} → move up (row -1, same column)
+
+// {0, 1} → move right (same row, column +1)
+
+// {0, -1} → move left (same row, column -1)
     vector<vector<int>> directions{{1,0},{-1,0},{0,1},{0,-1}};
     bool find(vector<vector<char>>& board ,int i,int j, int idx, string& word){
         if(idx == word.length()) 
@@ -22,8 +29,14 @@ public:
         for(auto &dir : directions){
             int new_i= i+dir[0];
             int new_j = j+dir[1];
+// dir = {1, 0} → new_i = i+1, new_j = j → down
+// dir = {-1, 0} → new_i = i-1, new_j = j → up
+//  dir = {0, 1} → new_i = i, new_j = j+1 → right
+//  dir = {0, -1} → new_i = i, new_j = j-1 → left
 
-            if(find(board ,new_i , new_j, idx+1,word))
+
+
+           if(find(board ,new_i , new_j, idx+1,word))
             {
                 return true;
             }
@@ -35,8 +48,8 @@ public:
         
     }
     bool exist(vector<vector<char>>& board, string word) {
-        m=board.size();
-        n=board[0].size();
+        m=board.size();//row
+        n=board[0].size();//column
 
         for(int i =0; i<m;i++){
             for(int j= 0;j<n;j++){
