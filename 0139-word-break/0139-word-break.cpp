@@ -2,21 +2,19 @@ class Solution {
 public:
     unordered_set<string> st;
     int n;
-    int t[301];
+    int t[301];//-1 =unvisited ,0=false ,1=true
     
 
     bool solve(int idx, string &s){
-        if(idx >= n){
-            return true;
+        if(idx == n){
+            return true;//reached end of string
 
         }
         if(t[idx]!= -1)
-            return t[idx];
+            return t[idx];//memoization
 
-        if(st.find(s)!= st.end())
-            return true;
-
-        for(int l=1;l<=n;l++){
+        
+        for(int l=1;l<=n-idx;l++){
             string temp=s.substr(idx,l);
             if(st.find(temp)!=st.end()&& solve(idx +l,s)){
                 return t[idx]=true;
