@@ -1,12 +1,10 @@
 class Solution:
     def check(self, nums: List[int]) -> bool:
         n=len(nums)
-        breaks=0
-        for i in range(0,n):
-            if nums[i] >nums[(i+1)%n]:
-                breaks=breaks+1
-        
-        if(breaks<=1):
+        count=0
+        if n==1:
             return True
-
-        return False
+        for i in range(n):
+            if nums[i]> nums[(i+1)%n]:
+                count+=1
+        return count<=1
